@@ -15,9 +15,8 @@ class Menu:
             "2": self.crear_tweet,
             "3": self.ver_perfil,
             "4": self.eliminar_tweet,
-            "5": self.eliminar_comentario,
-            "6": self.eliminar_cuenta,
-            "7": self.salir
+            "5": self.eliminar_cuenta,
+            "6": self.salir
         }
 
     def bienvenida(self):
@@ -95,9 +94,8 @@ class Menu:
         print("2. Crear Tweet")
         print("3. Ver Perfil")
         print("4. Eliminar Tweet")
-        print("5. Eliminar Comentario")
-        print("6. Eliminar Cuenta")
-        print("7. Salir")
+        print("5. Eliminar Cuenta")
+        print("6. Salir")
 
     def ejecutar_opcion_principal(self, opcion):
         accion = self.opciones_menu_principal.get(opcion)
