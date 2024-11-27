@@ -129,10 +129,6 @@ class Menu:
         id_tweet = input("Introduce el ID del tweet que deseas eliminar: ")
         self.db.eliminar_tweet(id_tweet)
     
-    def eliminar_comentario(self):
-        id_comentario = input("Introduce el ID del comentario que deseas eliminar: ")
-        self.db.eliminar_comentario(id_comentario)
-        
     def eliminar_cuenta(self):
         confirmacion = input("¿Estás seguro de que deseas eliminar tu cuenta? (si/no): ").lower()
         
