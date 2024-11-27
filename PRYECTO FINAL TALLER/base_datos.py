@@ -72,9 +72,10 @@ class BaseDatos:
             cursor.execute("DELETE FROM usuarios WHERE id_usuario = %s", (id_usuario,))
 
             conexion.commit()
-            print(f"✅ Cuenta de usuario con ID {id_usuario} eliminada exitosamente.")
+            print("✅ Cuenta eliminada exitosamente.")
         except Exception as e:
             print(f"❌ Error al eliminar la cuenta: {e}")
         finally:
             cursor.close()
             conexion.close()
+    
