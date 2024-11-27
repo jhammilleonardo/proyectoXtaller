@@ -107,15 +107,18 @@ class Menu:
     def visualizar_tweets(self):
         """Muestra los tweets con el nombre del usuario y accede al menú 'Para ti'."""
         tweets = self.tweet_manager.obtener_tweets()
-        print("\n--- Tweets ---")
+        print("\n========== Tweets ==========")
         if not tweets:
             print("No hay tweets disponibles.")
             return
 
         for tweet in tweets:
-            id_tweet, nombre_usuario, contenido, fecha = tweet
-            print(f"\nUsuario: {nombre_usuario} | Fecha: {fecha}")
-            print(f"Contenido: {contenido}")
+            id_publicacion, id_usuario, nombre_usuario, contenido, fecha = tweet
+            print(f"\n📌 Tweet ID: {id_publicacion}")
+            print(f"👤 Usuario: {nombre_usuario}")
+            print(f"🕒 Fecha: {fecha}")
+            print(f"✍️ Contenido: {contenido}")
+            print("-" * 30)
         
 
     def ver_perfil(self):

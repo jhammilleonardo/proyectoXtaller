@@ -5,13 +5,13 @@ class Tweet:
         self.db = BaseDatos()
 
     def obtener_tweets(self):
-        """Obtiene los tweets junto con el nombre del usuario que los publicó."""
+        """Obtiene los tweets junto con el nombre del usuario que los publicó y el ID de la publicación."""
         conexion = self.db.conectar()
         cursor = conexion.cursor()
         try:
             cursor.execute(
                 """
-                SELECT p.id_usuario, u.nombre_usuario, p.contenido, p.fecha_publicacion
+                SELECT p.id_publicacion, p.id_usuario, u.nombre_usuario, p.contenido, p.fecha_publicacion
                 FROM publicaciones p
                 INNER JOIN usuarios u ON p.id_usuario = u.id_usuario
                 ORDER BY p.fecha_publicacion DESC
