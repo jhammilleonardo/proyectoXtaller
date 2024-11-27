@@ -119,24 +119,55 @@ class Menu:
             print(f"🕒 Fecha: {fecha}")
             print(f"✍️ Contenido: {contenido}")
             print("-" * 30)
-        
 
     def ver_perfil(self):
         """Llama al método 'ver_perfil' de la clase Perfil"""
         self.perfil.ver_perfil(self.usuario_actual)
 
     def eliminar_tweet(self):
+        """Elimina un tweet del usuario después de mostrar los detalles y confirmar."""
+        print("\n========== Tweets ==========")
+        tweets = self.tweet_manager.obtener_tweets()
+        if not tweets:
+            print("No hay tweets para eliminar.")
+            return
+        
+        # Mostrar todos los tweets
+        for tweet in tweets:
+            id_publicacion, id_usuario, nombre_usuario, contenido, fecha = tweet
+            print(f"\n📌 Tweet ID: {id_publicacion}")
+            print(f"👤 Usuario: {nombre_usuario}")
+            print(f"🕒 Fecha: {fecha}")
+            print(f"✍️ Contenido: {contenido}")
+            print("-" * 30)
+
+        # Pedir el ID del tweet a eliminar
         id_tweet = input("Introduce el ID del tweet que deseas eliminar: ")
-        self.db.eliminar_tweet(id_tweet)
-    
-    def eliminar_comentario(self):
-        id_comentario = input("Introduce el ID del comentario que deseas eliminar: ")
-        self.db.eliminar_comentario(id_comentario)
-    
+
+        # Obtener el tweet por ID
+        tweet = self.tweet_manager.obtener_tweet_por_id(id_tweet)
+
+        if tweet:
+            print(f"\n--- Confirmar Eliminación ---")
+            print(f"📌 Tweet ID: {tweet[0]}")
+            print(f"👤 Usuario: {tweet[2]}")
+            print(f"🕒 Fecha: {tweet[4]}")
+            print(f"✍️ Contenido: {tweet[3]}")
+            confirmacion = input("¿Estás seguro de que deseas eliminar este tweet? (s/n): ")
+
+            if confirmacion.lower() == 's':
+                # Eliminar el tweet de la base de datos
+                self.db.eliminar_tweet(id_tweet)
+                print("✅ Tweet eliminado exitosamente.")
+            else:
+                print("❌ Eliminación cancelada.")
+        else:
+            print("❌ No se encontró el tweet con ese ID.")
+
     def eliminar_cuenta(self):
         id_usuario = input("Introduce el ID de la cuenta que deseas eliminar: ")
         self.db.eliminar_cuenta(id_usuario)
-    
+
     def salir(self):
         print("Cerrando sesión...")
         self.usuario_actual = None

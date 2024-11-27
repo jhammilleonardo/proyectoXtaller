@@ -25,3 +25,25 @@ class Tweet:
         finally:
             cursor.close()
             conexion.close()
+
+    def obtener_tweet_por_id(self, id_tweet):
+        """Obtiene un tweet específico por su ID."""
+        conexion = self.db.conectar()
+        cursor = conexion.cursor()
+        try:
+            cursor.execute(
+                """
+                SELECT p.id_publicacion, p.id_usuario, u.nombre_usuario, p.contenido, p.fecha_publicacion
+                FROM publicaciones p
+                INNER JOIN usuarios u ON p.id_usuario = u.id_usuario
+                WHERE p.id_publicacion = %s
+                """, (id_tweet,)
+            )
+            tweet = cursor.fetchone()
+            return tweet
+        except Exception as e:
+            print(f"❌ Error al obtener el tweet: {e}")
+            return None
+        finally:
+            cursor.close()
+            conexion.close()
