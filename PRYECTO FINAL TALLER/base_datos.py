@@ -39,23 +39,6 @@ class BaseDatos:
             cursor.close()
             conexion.close()
 
-    def eliminar_comentario(self, id_comentario):
-        """Elimina el comentario especificado."""
-        conexion = self.conectar()
-        cursor = conexion.cursor()
-
-        try:
-            # Eliminar el comentario
-            cursor.execute("DELETE FROM comentarios WHERE id_comentario = %s", (id_comentario,))
-            
-            conexion.commit()
-            print(f"✅ Comentario con ID {id_comentario} eliminado exitosamente.")
-        except Exception as e:
-            print(f"❌ Error al eliminar el comentario: {e}")
-        finally:
-            cursor.close()
-            conexion.close()
-
     def eliminar_cuenta(self, id_usuario):
         """Elimina la cuenta de usuario especificada junto con todos sus tweets y comentarios."""
         conexion = self.conectar()
